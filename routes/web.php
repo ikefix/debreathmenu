@@ -64,7 +64,10 @@ Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->n
 Route::delete('/categories/{id}/delete', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 // Public user-facing category page
-Route::get('/browse-categories', [App\Http\Controllers\FoodController::class, 'browseCategories'])->name('browse.categories');
+// Route::get('/browse-categories', [App\Http\Controllers\FoodController::class, 'browseCategories'])->name('browse.categories');
+
+Route::get('/browse-categories', [FoodController::class, 'browseCategories'])->name('categories');
+Route::get('/categories/{id}', [FoodController::class, 'showCategory'])->name('categories.show');
 
 // Route::get('/', [QrController::class, 'showQr']);        // root shows QR
 // Route::get('/welcome', [QrController::class, 'welcome'])->name('welcome'); // actual welcome page
@@ -80,6 +83,13 @@ Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.
 
 
 Route::post('/complete-order', [OrderController::class, 'complete'])->name('order.complete');
+
+
+// // Admin view all orders
+Route::get('admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+
+// Update order status
+Route::patch('admin/orders/{order}', [OrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
 
 
 require __DIR__.'/auth.php';

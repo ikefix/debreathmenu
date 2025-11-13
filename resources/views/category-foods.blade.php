@@ -1,28 +1,20 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome - FoodHub</title>
-
-    <link href="https://fonts.bunny.net/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $category->name }} - FoodHub</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #fff8f3, #ffe5d0);
-            color: #1a1a1a;
+            font-family: 'Nunito', sans-serif;
+            background-color: #fff7f3;
             margin: 0;
             padding: 0;
         }
 
-        /* CART ICON */
+        /* ✅ CART ICON */
         .cart-icon {
             position: fixed;
             top: 20px;
@@ -46,11 +38,11 @@
             font-weight: bold;
         }
 
-        /* SIDEBAR CART */
+        /* ✅ SIDEBAR CART */
         .cart-sidebar {
             position: fixed;
             top: 0;
-            right: -350px;
+            right: -400px;
             width: 350px;
             height: 100%;
             background: white;
@@ -113,143 +105,100 @@
             font-size: 1rem;
         }
 
-        /* HEADER */
-        .header {
-            text-align: center;
-            background: #ef3b2d;
-            color: white;
-            padding: 60px 20px;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            margin: 0;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-
-        .header .category-btn {
-            display: inline-block;
-            background: white;
-            color: #ef3b2d;
-            padding: 10px 24px;
-            border-radius: 25px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: 0.3s;
-            border: 2px solid white;
-        }
-
-        .header .category-btn:hover {
-            background: transparent;
-            color: white;
-            border-color: white;
-        }
-
-        /* GRID */
         .container {
-            max-width: 1200px;
-            margin: 50px auto;
+            max-width: 1100px;
+            margin: 80px auto;
             padding: 0 20px;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: #fff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            transition: all 0.35s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .no-image {
-            width: 100%;
-            height: 210px;
-            background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #444;
-            border-bottom: 4px solid #ef3b2d;
-        }
-
-        .no-image .icon {
-            font-size: 2.8rem;
-            margin-bottom: 8px;
-        }
-
-        .card img {
-            width: 100%;
-            height: 210px;
-            object-fit: cover;
-            border-bottom: 4px solid #ef3b2d;
-        }
-
-        .card-content {
-            padding: 20px;
+        h1 {
             text-align: center;
+            color: #ef3b2d;
+            margin-bottom: 20px;
         }
 
-        .card-content h3 {
-            font-size: 1.4rem;
-            color: #333;
-            margin-bottom: 10px;
+        .back-link {
+            text-decoration: none;
+            color: #ef3b2d;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .back-link i {
+            margin-right: 6px;
+        }
+
+        .foods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .food-placeholder {
+            height: 180px;
+            background: linear-gradient(135deg, #ffe0d9, #fff5f2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 2rem;
+        }
+
+        .food-card h4 {
+            margin: 12px 0 6px;
         }
 
         .price {
             color: #16a34a;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin: 10px 0;
+            font-weight: bold;
         }
 
         .btn {
-            display: inline-block;
             background: #ef3b2d;
             color: white;
-            padding: 10px 22px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 15px;
-            transition: 0.3s;
             border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
+            margin-top: 8px;
+            transition: 0.3s;
+            text-decoration: none;
         }
 
         .btn:hover {
-            background: #d42e21;
+            background: #d82d21;
         }
 
         .footer {
             text-align: center;
-            margin-top: 70px;
-            padding: 25px 0;
-            color: #444;
+            margin-top: 60px;
+            color: #777;
             font-size: 0.9rem;
-            border-top: 1px solid #ddd;
         }
     </style>
 </head>
-
 <body>
 
     <!-- ✅ CART ICON -->
@@ -293,48 +242,39 @@
         </div>
     </div>
 
-    <!-- HEADER -->
-    <div class="header">
-        <h1><i class='bx bx-bowl-hot'></i> Welcome to Debreath Lounge</h1>
-        <p>Discover fresh and delicious meals around you</p>
-        <a href="{{ route('browse.categories') }}" class="category-btn">
-            <i class='bx bx-list-ul'></i> Browse by Category
-        </a>
-    </div>
-
-    <!-- FOOD GRID -->
+    <!-- ✅ MAIN CONTENT -->
     <div class="container">
-        <div class="grid">
-            @forelse($foods as $food)
-                <div class="card">
+        <a href="{{ route('categories') }}" class="back-link">
+            <i class='bx bx-arrow-back'></i> Back to Categories
+        </a>
+
+        <h1>{{ $category->name }}</h1>
+
+        <div class="foods-grid">
+            @forelse($category->foods as $food)
+                <div class="food-card">
                     @if($food->image_url)
                         <img src="{{ $food->image_url }}" alt="{{ $food->name }}">
                     @else
-                        <div class="no-image">
-                            <div class="icon">🍲</div>
-                            <p>No image available</p>
-                        </div>
+                        <div class="food-placeholder">🍔</div>
                     @endif
 
-                    <div class="card-content">
-                        <h3>{{ $food->name }}</h3>
-                        <p class="price">₦{{ number_format($food->price, 2) }}</p>
-                        <p>{{ Str::limit($food->description, 80) }}</p>
+                    <h4>{{ $food->name }}</h4>
+                    <p class="price">₦{{ number_format($food->price, 2) }}</p>
 
-                        <form action="{{ route('add.to.cart', $food->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn">Order Now</button>
-                        </form>
-                    </div>
+                    <form action="{{ route('add.to.cart', $food->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn">Order Now</button>
+                    </form>
                 </div>
             @empty
-                <p class="no-foods">No foods uploaded yet.</p>
+                <p class="no-foods">No foods available in this category.</p>
             @endforelse
         </div>
-    </div>
 
-    <div class="footer">
-        &copy; {{ date('Y') }} FoodHub | Fresh & Delicious Meals 🍲
+        <div class="footer">
+            &copy; {{ date('Y') }} FoodHub | Taste the joy in every bite 🍔
+        </div>
     </div>
 
     <!-- ✅ JS TOGGLE SCRIPT -->
@@ -345,5 +285,4 @@
     </script>
 
 </body>
-
 </html>

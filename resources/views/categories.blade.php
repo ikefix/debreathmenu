@@ -163,44 +163,30 @@
 <body>
 
     <div class="container">
-        <h1><i class='bx bx-bowl-hot'></i> Explore Categories</h1>
+    <h1><i class='bx bx-bowl-hot'></i> Explore Categories</h1>
 
+    <div class="foods-grid">
         @forelse($categories as $category)
-            <div class="category" id="category-{{ $category->id }}">
-                <div class="category-header" onclick="toggleFoods({{ $category->id }})">
-                    <span>{{ $category->name }}</span>
-                    <span class="arrow">▶</span>
-                </div>
-
-                <div class="foods" id="foods-{{ $category->id }}">
-                    @if($category->foods->count() > 0)
-                        <div class="foods-grid">
-                            @foreach($category->foods as $food)
-                                <div class="food-card">
-                                    @if($food->image_url)
-                                        <img src="{{ $food->image_url }}" alt="{{ $food->name }}">
-                                    @else
-                                        <div class="food-placeholder">🍽️</div>
-                                    @endif
-                                    <h4>{{ $food->name }}</h4>
-                                    <p class="price">₦{{ number_format($food->price, 2) }}</p>
-                                    <a href="#" class="btn">Order Now</a>
-                                </div>
-                            @endforeach
-                        </div>
+            <div class="food-card">
+                <a href="{{ route('categories.show', $category->id) }}" style="text-decoration: none; color: inherit;">
+                    @if($category->image)
+                        <img src="{{ $category->image }}" alt="{{ $category->name }}">
                     @else
-                        <p class="no-foods">No foods available in this category.</p>
+                        <div class="food-placeholder">🍽️</div>
                     @endif
-                </div>
+                    <h4>{{ $category->name }}</h4>
+                </a>
             </div>
         @empty
             <p class="no-foods">No categories found.</p>
         @endforelse
-
-        <div class="footer">
-            &copy; {{ date('Y') }} FoodHub | Taste the joy in every bite 🍔
-        </div>
     </div>
+
+    <div class="footer">
+        &copy; {{ date('Y') }} FoodHub | Taste the joy in every bite 🍔
+    </div>
+</div>
+
 
     <script>
         function toggleFoods(id) {

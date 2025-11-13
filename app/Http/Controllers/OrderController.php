@@ -29,4 +29,26 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success', 'Order completed ✅');
     }
+
+
+
+    // Show all orders to admin
+public function index()
+{
+    $orders = CompletedOrder::orderBy('created_at', 'desc')->get();
+    return view('orders.order', compact('orders'));
+}
+
+// Update order status
+public function updateStatus(Request $request, CompletedOrder $order)
+{
+    $request->validate([
+        'status' => 'required|in:uncompleted,in_progress,completed'
+    ]);
+
+    $order->update(['status' => $request->status]);
+
+    return redirect()->back()->with('success', 'Order status updated!');
+}
+
 }

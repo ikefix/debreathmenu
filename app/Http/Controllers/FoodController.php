@@ -142,8 +142,15 @@ class FoodController extends Controller
 
 public function browseCategories()
 {
-    $categories = Category::with('foods')->get(); // assuming relation 'foods' exists
+    $categories = Category::all();
     return view('categories', compact('categories'));
 }
+
+public function showCategory($id)
+{
+    $category = Category::with('foods')->findOrFail($id);
+    return view('category-foods', compact('category'));
+}
+
 
 }

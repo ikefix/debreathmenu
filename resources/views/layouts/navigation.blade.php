@@ -23,11 +23,21 @@
                     <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
                         {{ __('Categories') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                        {{ __('Orders') }}
+                    </x-nav-link>
                 </div>
             </div>
 
-            <!-- Logout Button -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <!-- Right Side of Navbar -->
+            <div class="hidden sm:flex sm:items-center sm:ml-6 space-x-6">
+                <!-- Profile Link -->
+                <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                    {{ __('Profile') }}
+                </x-nav-link>
+
+                <!-- Logout Button -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
