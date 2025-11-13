@@ -244,7 +244,7 @@
 
     <!-- ✅ MAIN CONTENT -->
     <div class="container">
-        <a href="{{ route('categories') }}" class="back-link">
+        <a href="{{ route('browse.categories') }}" class="back-link">
             <i class='bx bx-arrow-back'></i> Back to Categories
         </a>
 
