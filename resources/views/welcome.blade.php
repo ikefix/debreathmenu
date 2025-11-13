@@ -280,37 +280,33 @@
                         <button class="remove-btn">🗑️</button>
                     </form>
                 </div>
+            @empty
+                <p class="empty-cart">Your cart is empty 🛒</p>
+            @endforelse
+
             @if(!empty($cart))
                 <form action="{{ route('order.complete') }}" method="POST">
                     @csrf
                     <button type="submit" class="checkout-btn">Complete Order ✅</button>
                 </form>
             @endif
-
         </div>
-
-        @if(!empty($cart))
-            <a href="#" class="checkout-btn">Complete Order ✅</a>
-        @endif
     </div>
 
     <!-- HEADER -->
     <div class="header">
-        <h1><i class='bx bx-bowl-hot'></i> Welcome to FoodHub</h1>
+        <h1><i class='bx bx-bowl-hot'></i> Welcome to Debreath Lounge</h1>
         <p>Discover fresh and delicious meals around you</p>
         <a href="{{ route('browse.categories') }}" class="category-btn">
             <i class='bx bx-list-ul'></i> Browse by Category
         </a>
     </div>
 
-
     <!-- FOOD GRID -->
     <div class="container">
         <div class="grid">
-
             @forelse($foods as $food)
                 <div class="card">
-
                     @if($food->image_url)
                         <img src="{{ $food->image_url }}" alt="{{ $food->name }}">
                     @else
@@ -329,13 +325,11 @@
                             @csrf
                             <button type="submit" class="btn">Order Now</button>
                         </form>
-
                     </div>
                 </div>
             @empty
                 <p class="no-foods">No foods uploaded yet.</p>
             @endforelse
-
         </div>
     </div>
 

@@ -1,4 +1,3 @@
-
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,7 +16,6 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <!-- Mobile / responsive nav link (inside responsive menu) -->
                     <x-nav-link :href="route('foods.index')" :active="request()->routeIs('foods.*')">
                         {{ __('Foods') }}
                     </x-nav-link>
@@ -27,11 +25,17 @@
                     </x-nav-link>
                 </div>
             </div>
-            <!-- (rest of dropdown + responsive nav unchanged) -->
+
+            <!-- Logout Button -->
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit"
+                        class="text-gray-700 dark:text-gray-200 hover:text-red-600 focus:outline-none focus:text-red-600 text-sm font-medium">
+                        {{ __('Logout') }}
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>
-
-
-
-
