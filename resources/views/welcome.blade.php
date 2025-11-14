@@ -296,7 +296,7 @@
     <!-- HEADER -->
     <div class="header">
         <h1><i class='bx bx-bowl-hot'></i> Welcome to Debreath Lounge</h1>
-        <p>Discover fresh and delicious meals around you</p>
+        <p>Your Goto Lounge in the city of Port Harcourt </p>
         <a href="{{ route('browse.categories') }}" class="category-btn">
             <i class='bx bx-list-ul'></i> Browse by Category
         </a>
